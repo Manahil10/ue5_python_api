@@ -1,7 +1,7 @@
 # ue5_python_api
 Unreal Python API Documentation
 
-### 1. `unreal.find_asset(name, type=Object, follow_redirectors=True) → Object`
+## 1. `unreal.find_asset(name, type=Object, follow_redirectors=True) → Object`
 
 - **Purpose**: This function is used to find an already loaded asset in UE5 by its name. You can specify the type of asset you're looking for (e.g., `Texture`, `Material`, `Blueprint`) to ensure the returned object is of the desired type. The `follow_redirectors` parameter helps in resolving any asset redirection that might have occurred (useful in asset management and refactoring scenarios).
 - **Example**: Finding a specific material to apply to a mesh dynamically during runtime or in editor scripts.
@@ -14,7 +14,7 @@ Unreal Python API Documentation
         print("Material not found.")
     ```
 
-### 2. `unreal.load_asset(name, type=Object, follow_redirectors=True) → Object`
+## 2. `unreal.load_asset(name, type=Object, follow_redirectors=True) → Object`
 
 - **Purpose**: Similar to `find_asset` but loads the asset into memory if it's not already loaded. This is particularly useful for assets that are not initially loaded at runtime or for tools that need to work with assets dynamically without the user having to open them first.
 - **Example**: Loading a texture dynamically to apply to an actor's material in a level.
@@ -25,7 +25,7 @@ Unreal Python API Documentation
         print("Texture loaded: ", texture.get_name())
     ```
 
-### 3. `unreal.new_object(type, outer=Transient, name=Default, base_type=Object) → Object`
+## 3. `unreal.new_object(type, outer=Transient, name=Default, base_type=Object) → Object`
 
 - **Purpose**: Creates a new Unreal object of a specified class. You can define the object's outer (its parent/container), name, and ensure it inherits from a certain base type. This is fundamental for creating custom tools or runtime features that generate or manipulate content dynamically.
 - **Example**: Creating a new custom actor in the world.
@@ -36,7 +36,7 @@ Unreal Python API Documentation
         print("New actor created: ", actor.get_name())
     ```
 
-### 4. `unreal.generate_class(type) → None`
+## 4. `unreal.generate_class(type) → None`
 
 - **Purpose**: Generates an Unreal class from a given Python class. This is crucial for extending UE5 with custom logic that integrates deeply with the engine, allowing Python to define new types that behave as native UE5 classes.
 - **Example**: Defining a new UObject subclass in Python and registering it with UE5.
@@ -49,7 +49,7 @@ Unreal Python API Documentation
     unreal.generate_class(MyCustomClass)
     ```
 
-### 5. `unreal.log(str) → None`
+## 5. `unreal.log(str) → None`
 
 - **Purpose**: Logs a message to the Unreal Engine log system. This is essential for debugging and providing feedback during the execution of Python scripts within UE5.
 - **Example**: Logging a message when a particular operation is completed.
@@ -58,7 +58,7 @@ Unreal Python API Documentation
     unreal.log("Operation completed successfully.")
     ```
 
-### 6. `unreal.get_default_object(type) → Object`
+## 6. `unreal.get_default_object(type) → Object`
 
 - **Purpose**: Retrieves the Class Default Object (CDO) of a given Unreal class. This is useful for accessing default properties of a class without needing an instance of that class.
 - **Example**: Getting the default walk speed of the character class.
@@ -70,7 +70,7 @@ Unreal Python API Documentation
 
 Given the extensive list of functions and the detailed explanation format requested, providing comprehensive explanations for each function would result in a very long response. However, I'll cover a few more key functions to demonstrate how to document them effectively. For the remaining functions, I recommend following the template and approach outlined in the initial set of explanations.
 
-### 7. `unreal.get_editor_subsystem() → subsystem`
+## 7. `unreal.get_editor_subsystem() → subsystem`
 
 - **Purpose**: Retrieves an instance of an editor subsystem. Editor subsystems provide various functionalities within the UE5 editor, such as managing assets, levels, or the user interface. This function is crucial for scripts that aim to interact with or automate aspects of the editor's behavior.
 - **Example**: Accessing the asset registry to find all assets of a certain type.
@@ -81,7 +81,7 @@ Given the extensive list of functions and the detailed explanation format reques
     print(f"Found {len(all_materials)} materials.")
     ```
 
-### 8. `unreal.is_editor() → Bool`
+## 8. `unreal.is_editor() → Bool`
 
 - **Purpose**: Checks whether the Unreal Editor is currently running. This is useful for scripts that should behave differently when running in the editor versus in a standalone game or during a packaged game session.
 - **Example**: Conditional logic based on the environment.
@@ -93,7 +93,7 @@ Given the extensive list of functions and the detailed explanation format reques
         print("Running in game mode.")
     ```
 
-### 9. `unreal.load_package(name) → Package`
+## 9. `unreal.load_package(name) → Package`
 
 - **Purpose**: Loads an Unreal package by name. Packages in UE5 are containers for assets and can include levels, blueprints, and other content. This function is particularly useful for tools that need to load or manipulate entire packages programmatically.
 - **Example**: Loading a level package to modify its contents.
@@ -104,7 +104,7 @@ Given the extensive list of functions and the detailed explanation format reques
         print(f"Package {level_package.get_name()} loaded.")
     ```
 
-### 10. `unreal.purge_object_references(obj, include_inners=True) → None`
+## 10. `unreal.purge_object_references(obj, include_inners=True) → None`
 
 - **Purpose**: Purges all references to a given Unreal object from any living Python objects. This is crucial for memory management and avoiding dangling references that can lead to crashes or unpredictable behavior, especially after deleting objects in the editor.
 - **Example**: Cleaning up references after dynamically removing an actor.
@@ -116,7 +116,7 @@ Given the extensive list of functions and the detailed explanation format reques
     print("Actor and its references purged.")
     ```
 
-### 11. `unreal.register_python_shutdown_callback(callable) → _DelegateHandle`
+## 11. `unreal.register_python_shutdown_callback(callable) → _DelegateHandle`
 
 - **Purpose**: Registers a Python callable to be executed immediately before Python shuts down. This is useful for cleanup tasks or saving state before the Python environment is terminated.
 - **Example**: Registering a shutdown callback.
@@ -129,7 +129,7 @@ Given the extensive list of functions and the detailed explanation format reques
 
 Continuing with the detailed explanations for the Unreal Engine 5 Python API functions, let's dive into more of them:
 
-### 12. `unreal.reload(str) → None`
+## 12. `unreal.reload(str) → None`
 
 - **Purpose**: Reloads a specified Unreal Engine Python module. This function is particularly useful during development, allowing developers to quickly test changes to their Python scripts without restarting the Unreal Editor.
 - **Example**: Reloading a custom Python module named `my_module`.
@@ -139,7 +139,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     print("Module reloaded successfully.")
     ```
 
-### 13. `unreal.get_type_from_class(class) → type`
+## 13. `unreal.get_type_from_class(class) → type`
 
 - **Purpose**: Retrieves the best matching Python type for a given Unreal class. This function is crucial for scripts that need to dynamically work with Unreal objects and require type checking or casting based on the Unreal class.
 - **Example**: Getting the Python type for a `StaticMesh` Unreal class.
@@ -149,7 +149,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     print(f"The Python type for StaticMesh is {python_type}.")
     ```
 
-### 14. `unreal.get_type_from_enum(enum) → type`
+## 14. `unreal.get_type_from_enum(enum) → type`
 
 - **Purpose**: Obtains the best matching Python type for a given Unreal enumeration (enum). This can be essential for scripts that need to interpret or set enum values from Python, ensuring type safety and correctness.
 - **Example**: Getting the Python type for an enum `EVisibility`.
@@ -159,7 +159,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     print(f"The Python type for EVisibility is {enum_type}.")
     ```
 
-### 15. `unreal.log_error(str) → None`
+## 15. `unreal.log_error(str) → None`
 
 - **Purpose**: Logs a given string as an error in the Unreal Engine's log system under the `LogPython` category. This is used for reporting errors encountered during the execution of Python scripts in UE5, helping in debugging and development.
 - **Example**: Logging an error message when an operation fails.
@@ -168,7 +168,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     unreal.log_error("Failed to load the specified asset.")
     ```
 
-### 16. `unreal.log_warning(str) → None`
+## 16. `unreal.log_warning(str) → None`
 
 - **Purpose**: Logs a given string as a warning in the Unreal Engine's log system, similar to `log_error` but for less severe issues. This can be used to alert users of potential problems or misconfigurations in scripts without treating them as critical errors.
 - **Example**: Warning about deprecated usage.
@@ -177,7 +177,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     unreal.log_warning("This function is deprecated and will be removed in future versions.")
     ```
 
-### 17. `unreal.log_flush() → None`
+## 17. `unreal.log_flush() → None`
 
 - **Purpose**: Flushes the log to disk, ensuring that all logged messages up to this point are saved. This is particularly useful in long-running scripts or processes where immediate log persistence is necessary.
 - **Example**: Flushing logs after a critical operation.
@@ -187,7 +187,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     unreal.log_flush()
     ```
 
-### 18. `unreal.ustruct()`
+## 18. `unreal.ustruct()`
 
 - **Purpose**: A decorator used to define UStruct types from Python. This allows for the creation of custom data structures that can be used within UE5, enabling complex data manipulation and storage directly from Python scripts.
 - **Example**: Defining a new struct to hold game settings.
@@ -202,7 +202,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     print("Custom struct defined and generated.")
     ```
 
-### 19. `unreal.load_class(outer, name, type=Object) → Class`
+## 19. `unreal.load_class(outer, name, type=Object) → Class`
 
 - **Purpose**: Loads an Unreal class with the given outer and name, optionally validating its base type. This function is useful for dynamically accessing or creating instances of Unreal classes from Python scripts.
 - **Example**: Loading a custom actor class.
@@ -213,7 +213,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
         print(f"Custom Actor class loaded: {custom_actor_class.get_name()}")
     ```
 
-### 20. `unreal.register_slate_pre_tick_callback(callable) → _DelegateHandle`
+## 20. `unreal.register_slate_pre_tick_callback(callable) → _DelegateHandle`
 
 - **Purpose**: Registers a callable (function) to be executed as a pre-tick callback in Slate, Unreal's UI framework. This can be used for updating custom UI elements or executing logic before the UI is drawn each frame.
 - **Example**: Registering a function to update UI elements.
@@ -227,7 +227,7 @@ Continuing with the detailed explanations for the Unreal Engine 5 Python API fun
     print("UI update callback registered.")
     ```
 
-###21. unreal.unregister_slate_pre_tick_callback(handle) → None
+## 21. unreal.unregister_slate_pre_tick_callback(handle) → None
 Purpose: Unregisters a previously registered pre-tick callback in Slate, stopping the callback function from being executed before the UI is drawn each frame. This is useful for cleaning up or disabling UI updates when they are no longer needed.
 
 Example: Unregistering a UI update function.
@@ -238,7 +238,7 @@ Example: Unregistering a UI update function.
 unreal.unregister_slate_pre_tick_callback(handle)
 print("UI update callback unregistered.")'''
 
-###22. unreal.register_slate_post_tick_callback(callable) → _DelegateHandle
+## 22. unreal.register_slate_post_tick_callback(callable) → _DelegateHandle
 Purpose: Registers a callable (function) to be executed as a post-tick callback in Slate. This can be used for executing logic after the UI has been drawn each frame, such as cleanup or late updates to the UI.
 
 Example: Registering a function to perform cleanup tasks after UI render.
@@ -252,7 +252,7 @@ def cleanup_ui(delta_seconds):
 handle = unreal.register_slate_post_tick_callback(cleanup_ui)
 print("Post UI render cleanup callback registered.")'''
 
-###23. unreal.unregister_slate_post_tick_callback(handle) → None
+## 23. unreal.unregister_slate_post_tick_callback(handle) → None
 Purpose: Unregisters a previously registered post-tick callback in Slate. This function is necessary for removing callbacks that are no longer needed, preventing unnecessary executions and potential performance impacts.
 
 Example: Unregistering a post-UI render cleanup function.
@@ -263,7 +263,7 @@ Example: Unregistering a post-UI render cleanup function.
 unreal.unregister_slate_post_tick_callback(handle)
 print("Post UI render cleanup callback unregistered.")'''
 
-###24. unreal.register_python_shutdown_callback(callable) → _DelegateHandle
+## 24. unreal.register_python_shutdown_callback(callable) → _DelegateHandle
 Purpose: Registers a Python callable to be executed immediately before Python shutdowns within Unreal Engine. This is particularly useful for scripts that need to perform cleanup or save operations before the Python environment is closed.
 
 Example: Registering a shutdown cleanup function.
@@ -276,7 +276,7 @@ def on_python_shutdown():
 handle = unreal.register_python_shutdown_callback(on_python_shutdown)
 print("Shutdown callback registered.")'''
 
-###25. unreal.unregister_python_shutdown_callback(handle) → None
+## 25. unreal.unregister_python_shutdown_callback(handle) → None
 Purpose: Unregisters a previously registered Python shutdown callback. This ensures that the callback function is no longer called during Python shutdown, which is useful for dynamically managing callbacks based on runtime conditions.
 
 Example: Unregistering a shutdown cleanup function.
@@ -287,7 +287,7 @@ Example: Unregistering a shutdown cleanup function.
 unreal.unregister_python_shutdown_callback(handle)
 print("Shutdown callback unregistered.")'''
 
-###26. unreal.uproperty(type, meta=None, getter=None, setter=None)
+## 26. unreal.uproperty(type, meta=None, getter=None, setter=None)
 Purpose: Defines a UProperty field from Python, allowing for the creation of custom properties that can be exposed to Unreal's editor and used within Blueprints or C++. This is critical for extending the functionality of custom classes with new data fields.
 
 Example: Defining a custom property in a Python class.
@@ -303,7 +303,7 @@ class MyCustomActor(unreal.Actor):
     def my_int_property(self, value):
         self._my_int_property = value"
 '''
-###27. unreal.ufunction(meta=None, ret=None, params=None, override=None, static=None, pure=None, getter=None, setter=None)
+## 27. unreal.ufunction(meta=None, ret=None, params=None, override=None, static=None, pure=None, getter=None, setter=None)
 Purpose: Decorator used to define UFunction fields from Python. UFunctions are functions that can be called from Blueprints or C++, and this decorator allows Python methods to be exposed in such a way. This is essential for integrating Python logic into the broader UE scripting ecosystem.
 
 Example: Exposing a Python method as a UFunction.
@@ -316,7 +316,7 @@ class MyCustomActor(unreal.Actor):
         return a + b
 '''
 
-###28. unreal.get_engine_subsystem() → subsystem
+## 28. unreal.get_engine_subsystem() → subsystem
 Purpose: This function is used to retrieve a specific engine subsystem instance. Engine subsystems offer a variety of lower-level functionalities that are global to the engine, such as the gameplay, rendering, and audio systems. This is crucial for scripts that need to interact with or modify the engine's core functionalities at runtime.
 
 Example: Accessing the audio system to change global audio settings.
@@ -329,7 +329,7 @@ if audio_system:
     print("Master volume set to 50%.")
 '''
 
-###29. unreal.get_interpreter_executable_path() → str
+## 29. unreal.get_interpreter_executable_path() → str
 Purpose: Retrieves the file path to the Python interpreter executable that the Unreal Engine's Python plugin was compiled against. This can be essential for scripts that need to spawn separate Python processes or for debugging purposes to ensure compatibility with the correct Python version.
 
 Example: Printing the path of the Python interpreter.
@@ -339,7 +339,7 @@ Example: Printing the path of the Python interpreter.
 interpreter_path = unreal.get_interpreter_executable_path()
 print(f"Python interpreter path: {interpreter_path}")'''
 
-###30. unreal.get_type_from_struct(struct) → type
+## 30. unreal.get_type_from_struct(struct) → type
 Purpose: Obtains the best matching Python type for a given Unreal struct. This function is important for dynamic scripting where Python code needs to work with custom Unreal structures, ensuring that Python and UE4 types are correctly mapped.
 
 Example: Getting the Python type for a custom struct named MyCustomStruct.
@@ -349,7 +349,7 @@ Example: Getting the Python type for a custom struct named MyCustomStruct.
 struct_type = unreal.get_type_from_struct(unreal.MyCustomStruct)
 print(f"The Python type for MyCustomStruct is {struct_type}.")'''
 
-###31. unreal.load_module(str) → None
+## 31. unreal.load_module(str) → None
 Purpose: Loads a specified Unreal module and generates Python bindings for its reflected types. This is particularly useful for extending scripts with functionalities from different parts of the engine or custom modules not loaded by default.
 
 Example: Loading a custom gameplay module named "MyGameplayModule".
@@ -359,7 +359,7 @@ Example: Loading a custom gameplay module named "MyGameplayModule".
 unreal.load_module("MyGameplayModule")
 print("MyGameplayModule loaded and Python bindings generated.")'''
 
-###32. unreal.LOCTABLE(id, key) → Text
+## 32. unreal.LOCTABLE(id, key) → Text
 Purpose: Retrieves a localized text from the given string table ID and key. This is crucial for developing internationalized applications within Unreal, allowing scripts to programmatically access and use localized content.
 
 Example: Fetching localized text for a UI element.
@@ -369,7 +369,7 @@ Example: Fetching localized text for a UI element.
 localized_text = unreal.LOCTABLE("MyStringTableID", "WelcomeMessage")
 print(f"Localized welcome message: {localized_text}")'''
 
-###33. unreal.NSLOCTEXT(ns, key, source) → Text
+## 33. unreal.NSLOCTEXT(ns, key, source) → Text
 Purpose: Creates a localized text using the specified namespace, key, and source string. This function is used when defining new localized texts within a script, providing a way to support multiple languages in game content or UI dynamically.
 
 Example: Creating a new localized text entry for a game notification.
@@ -379,7 +379,7 @@ Example: Creating a new localized text entry for a game notification.
 notification_text = unreal.NSLOCTEXT("GameNotifications", "HealthLow", "Warning: Health Low!")
 print(f"Localized notification text: {notification_text}")'''
 
-###34. unreal.parent_external_window_to_slate(external_window, parent_search_method=SlateParentWindowSearchMethod.ACTIVE_WINDOW) → None
+## 34. unreal.parent_external_window_to_slate(external_window, parent_search_method=SlateParentWindowSearchMethod.ACTIVE_WINDOW) → None
 Purpose: Parents an OS-specific external window handle to a suitable Slate window, based on the search method provided. This is useful for integrating third-party applications or custom UI elements into the Unreal Editor's windowing system.
 
 Example: Assuming you have an external window handle, parent it to the active Slate window.
@@ -391,7 +391,7 @@ external_window_handle = get_external_window_handle()
 unreal.parent_external_window_to_slate(external_window_handle)
 print("External window parented to an active Unreal Slate window.")'''
 
-###35. unreal.purge_object_references(obj, include_inners=True) → None
+## 35. unreal.purge_object_references(obj, include_inners=True) → None
 Purpose: Purges all references to a given Unreal object from any living Python objects. This function is essential for managing memory and preventing leaks by ensuring that objects are properly garbage collected when no longer needed.
 
 Example: Purging references to a deleted actor.
@@ -403,7 +403,7 @@ unreal.EditorLevelLibrary.destroy_actor(actor)
 unreal.purge_object_references(actor)
 print("References to the actor have been purged.")'''
 
-###36. unreal.uclass()
+## 36. unreal.uclass()
 Purpose: The unreal.uclass() decorator is used to define UClass types from Python, allowing developers to create new Unreal Engine classes directly from Python scripts. These classes can then be instantiated as objects within the Unreal Engine ecosystem, fully integrating with the engine's type system and enabling a wide range of functionalities from gameplay mechanics to editor extensions.
 
 Example: Defining a new Unreal Engine class for a custom actor.
@@ -415,7 +415,7 @@ class MyCustomActor(unreal.Actor):
     """A simple custom actor defined in Python."""
 '''
 
-###37. unreal.uenum()
+## 37. unreal.uenum()
 Purpose: This decorator is utilized to define UEnum types from Python, facilitating the creation of enumerated types (enums) that are recognized by Unreal Engine. Enums defined this way can be used to create readable, discrete sets of values for variables in UE scripts and blueprints, enhancing code clarity and maintainability.
 
 Example: Creating an enum for character states.
@@ -429,7 +429,7 @@ class CharacterState:
     JUMPING = 2
     ATTACKING = 3
 '''
-###38. unreal.ufunction(meta=None, ret=None, params=None, override=None, static=None, pure=None, getter=None, setter=None)
+## 38. unreal.ufunction(meta=None, ret=None, params=None, override=None, static=None, pure=None, getter=None, setter=None)
 Purpose: The unreal.ufunction() decorator is designed to define UFunction fields from Python. UFunctions are functions that are callable within the UE scripting environment, including blueprints and C++. This decorator allows Python methods to be exposed to UE as functions, enabling complex logic to be implemented in Python and seamlessly integrated into the engine's workflow.
 
 Example: Exposing a Python method as a callable function in Unreal Engine.
@@ -443,7 +443,7 @@ class MyActor(unreal.Actor):
         return a + b
 '''
 
-###39. unreal.uproperty(type, meta=None, getter=None, setter=None)
+## 39. unreal.uproperty(type, meta=None, getter=None, setter=None)
 Purpose: This function is used to define UProperty fields from Python, allowing the creation of properties that can be exposed to the Unreal Engine editor and used within blueprints or C++ code. It provides a way to add editable, serializable fields to custom classes, enriching the interaction between Python scripts and the engine.
 
 Example: Adding a property to a custom actor class.
@@ -460,7 +460,7 @@ class MyCustomActor(unreal.Actor):
         self._health = value
 '''
 
-###40. unreal.ustruct()
+## 40. unreal.ustruct()
 Purpose: The unreal.ustruct() decorator is used to define UStruct types from Python, enabling the creation of structured data types that are recognized by Unreal Engine. Structs are useful for grouping related data together, and when defined in Python, they can be utilized both in scripting and within the UE editor for data management and manipulation.
 
 Example: Defining a struct for game settings.
@@ -475,7 +475,7 @@ class GameSettings:
     volume: float
 '''
 
-###41. unreal.uvalue(val, meta=None)
+## 41. unreal.uvalue(val, meta=None)
 Purpose: This function is utilized to define constant values from Python, making them available within the Unreal Engine. It allows for the definition of named constants that can be used for comparison, configuration, and as parameters in functions and blueprints, ensuring consistency across the project.
 
 Example: Defining a game version constant.
@@ -485,7 +485,7 @@ Example: Defining a game version constant.
 GAME_VERSION = unreal.uvalue("1.0.0")
 '''
 
-###42. unreal.new_object(type, outer=Transient, name=Default, base_type=Object) → Object
+## 42. unreal.new_object(type, outer=Transient, name=Default, base_type=Object) → Object
 Purpose: Creates a new Unreal object of the specified class, optionally within a specified outer container and with a specific name. This is a foundational operation for scripts that dynamically generate content, manipulate scene hierarchy, or create utility objects at runtime or within the editor.
 
 Example: Creating a new actor in the current level.
@@ -496,7 +496,7 @@ new_actor = unreal.new_object(unreal.Actor, unreal.get_editor_world(), name="MyN
 print(f"New actor created: {new_actor.get_name()}")
 '''
 
-###43. unreal.reload(str) → None
+## 43. unreal.reload(str) → None
 Purpose: Reloads a specified Unreal Python module, refreshing its state and code. This is crucial during development, allowing for rapid iteration on Python scripts without needing to restart the Unreal Engine editor.
 
 Example: Reloading a custom module after making changes.
@@ -508,7 +508,7 @@ unreal.reload(module_name)
 print(f"Module {module_name} reloaded.")
 '''
 
-###44. unreal.unregister_python_shutdown_callback(handle) → None, unreal.unregister_slate_post_tick_callback(handle) → None, unreal.unregister_slate_pre_tick_callback(handle) → None
+## 44. unreal.unregister_python_shutdown_callback(handle) → None, unreal.unregister_slate_post_tick_callback(handle) → None, unreal.unregister_slate_pre_tick_callback(handle) → None
 Purpose: These functions unregister previously registered callbacks for Python shutdown, Slate post-tick, and pre-tick events, respectively. They are essential for managing the lifecycle of scripts and UI elements that interact with the Unreal Engine editor or runtime, ensuring that resources are properly cleaned up and that callbacks do not persist beyond their intended lifespan.
 
 Example: Unregistering a shutdown callback.
