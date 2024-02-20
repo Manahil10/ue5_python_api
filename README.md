@@ -232,25 +232,27 @@ Purpose: Unregisters a previously registered pre-tick callback in Slate, stoppin
 
 Example: Unregistering a UI update function.
 
-'''python
+```python
 
 # Assuming 'handle' is the handle returned from a previous register call
 unreal.unregister_slate_pre_tick_callback(handle)
-print("UI update callback unregistered.")'''
+print("UI update callback unregistered.")
+```
 
 ## 22. unreal.register_slate_post_tick_callback(callable) → _DelegateHandle
 Purpose: Registers a callable (function) to be executed as a post-tick callback in Slate. This can be used for executing logic after the UI has been drawn each frame, such as cleanup or late updates to the UI.
 
 Example: Registering a function to perform cleanup tasks after UI render.
 
-'''python
+```python
 
 def cleanup_ui(delta_seconds):
     # Cleanup logic here
     pass
 
 handle = unreal.register_slate_post_tick_callback(cleanup_ui)
-print("Post UI render cleanup callback registered.")'''
+print("Post UI render cleanup callback registered.")
+```
 
 ## 23. unreal.unregister_slate_post_tick_callback(handle) → None
 Purpose: Unregisters a previously registered post-tick callback in Slate. This function is necessary for removing callbacks that are no longer needed, preventing unnecessary executions and potential performance impacts.
