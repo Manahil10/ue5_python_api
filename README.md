@@ -2075,6 +2075,7 @@ Technical Implementation:
 While the exact implementation details might vary, the general approach involves defining the AddAllPatchesButton struct within the DMXEngine plugin's codebase and then creating a custom UI customization class that looks for this struct within the DMX Take Recorder properties. When found, the customization class would then inject the actual button into the UI, along with the logic needed to perform its intended action.
 
 
+
 ## 93. unreal.AddNewSubobjectParams
 The unreal.AddNewSubobjectParams struct in Unreal Engine is designed to encapsulate the various options and settings that can be specified when adding a new subobject to an actor or component, particularly within the context of a Blueprint. This functionality is crucial for dynamically extending the behavior and structure of objects within the game world, allowing for a more modular and flexible design approach.
 
