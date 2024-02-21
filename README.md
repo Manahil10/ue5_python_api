@@ -2109,3 +2109,136 @@ params = unreal.AddNewSubobjectParams(
 # Add the new sensor component to the actor
 new_sensor_handle = unreal.SubobjectDataSubsystem.add_new_subobject(params)
 ```
+## 94. unreal.AdvanceConversationRequest
+
+The unreal.AdvanceConversationRequest struct in Unreal Engine is part of the Common Conversation system, a framework designed to facilitate the creation and management of dialogue and conversation systems in games. This struct is specifically used to request the advancement of a conversation, typically after a player has made a choice or when the conversation should proceed to the next node based on game logic.
+
+Properties:
+choice (ConversationChoiceReference): This property holds a reference to the player's choice or the specific conversation node to which the conversation should advance. The ConversationChoiceReference can refer to either a direct node in the conversation tree or a more complex choice that involves branching logic.
+
+user_parameters (Array(ConversationNodeParameterPair)): An array of ConversationNodeParameterPair items, which are used to pass additional data or parameters into the conversation system. This could be used to dynamically alter the flow or content of the conversation based on game state, character attributes, or previous player choices. As of the note in the description, this feature is planned but not currently supported.
+
+Example Scenario:
+Imagine a dialogue system where a player is given a choice between two responses during a conversation with an NPC. The player's choice could influence the direction of the conversation, lead to different outcomes, or unlock additional dialogue options based on the game's narrative logic.
+
+```python
+
+# Pseudocode - Unreal Engine does not directly support Python for gameplay scripting
+
+# Assume `conversation_system` is an instance of the game's conversation management system
+# and `player_choice` is the choice made by the player, captured from the UI
+
+# Create an AdvanceConversationRequest to advance the conversation based on the player's choice
+advance_request = unreal.AdvanceConversationRequest(choice=player_choice)
+
+# Send the request to the conversation system to process and advance the conversation
+conversation_system.advance_conversation(advance_request)
+```
+
+## 95. unreal.AgentDebugVisualization
+The unreal.AgentDebugVisualization struct is part of the MassGameplay plugin in Unreal Engine, specifically within the MassGameplayDebug module. It is designed to facilitate debugging of agents within the Mass AI system by providing customizable visual representations. This struct is a valuable tool for developers working with large-scale AI simulations, as it allows for the visual inspection of agent states and behaviors in the game world.
+
+Properties:
+material_override (MaterialInterface): Allows for the specification of a custom material to be applied to the agent's visual representation during debugging. This can be used to color-code agents based on their state, faction, or any other relevant criteria.
+
+mesh (StaticMesh): Specifies a static mesh to be used as the visual representation of the agent during debugging. This can help in distinguishing different types of agents or simply providing a more contextually appropriate visual cue for the agent's role.
+
+visual_far_cull_distance (uint32): This property allows developers to set a custom far cull distance for the agent's visual representation, overriding the default value. It defines the maximum distance at which the agent's debug visualization will be rendered, helping to manage performance in dense simulations.
+
+visual_near_cull_distance (uint32): Similar to visual_far_cull_distance, this property sets a custom near cull distance for the agent's debug visualization. It determines the minimum distance at which the agent's visual representation begins to render, allowing for finer control over the visibility of agents in the debugging view.
+
+wire_shape (MassEntityDebugShape): In cases where a static mesh is not set, this property defines a wireframe shape to be used for debug drawing the agent via the Gameplay Debugger. This provides a lightweight, easily customizable way to visually represent agents without the need for specific mesh assets.
+
+Usage:
+AgentDebugVisualization is utilized in debugging scenarios where developers need to visually distinguish between different types of agents or inspect the behavior of agents within a simulation. By customizing the visual representation of agents, developers can more easily identify issues or verify that agents are behaving as expected.
+
+For example, in a game with a complex ecosystem of wildlife, different AgentDebugVisualization settings could be used to represent predators, prey, and neutral creatures with different meshes or colors. This allows developers to quickly assess the distribution and behavior of various entities in the simulation.
+
+Implementation:
+While AgentDebugVisualization is defined within the C++ source of the MassGameplay plugin, it would typically be accessed and configured either through C++ code or via Unreal Engine's data table system, thanks to its inheritance from TableRowBase. Developers can create a data table to define different visualization settings for various agent types and then reference these settings within their AI debugging workflows.
+
+```cpp
+
+// Example of setting up an AgentDebugVisualization in C++
+
+UAgentDebugVisualization* DebugVisualization = NewObject<UAgentDebugVisualization>(this);
+DebugVisualization->Mesh = MyAgentMesh;
+DebugVisualization->MaterialOverride = MyAgentMaterial;
+DebugVisualization->VisualFarCullDistance = 10000;
+DebugVisualization->VisualNearCullDistance = 100;
+DebugVisualization->WireShape = MassEntityDebugShape::Cube;
+``` 
+## 96. unreal.AIDamageEvent
+The unreal.AIDamageEvent struct in Unreal Engine is used within the AI Module, specifically with the AI Perception System, to represent and communicate information about damage events to AI characters. This struct allows AI systems to understand when damage has occurred, who was damaged, who caused the damage, and other relevant spatial information. It's essential for developing AI behaviors that respond to combat situations, such as seeking cover, retaliating, or assisting allies.
+
+Properties:
+amount (float): Represents the amount of damage taken by the damaged actor. This is a critical piece of information as it allows AI to gauge the severity of an attack. It's important to note that events with 0 damage are not ignored, allowing for potential uses in signaling or other gameplay mechanics where physical damage is not inflicted.
+
+damaged_actor (Actor): A reference to the actor that received damage. This allows the AI to identify who in the game world has been affected by the event.
+
+hit_location (Vector): Specifies the location where the damage occurred. This could be used for AI to focus attention or move towards/away from the point of impact. If not explicitly set, the system will default to using the damaged actor's location.
+
+instigator (Actor): The actor responsible for causing the damage. This can be None if the source of damage is not another actor, such as environmental hazards. Identifying the instigator is crucial for AI decisions regarding targeting or avoiding enemies.
+
+location (Vector): This represents a general location for the event, which is treated as the perceived location for AI sensing. If not set, it defaults to hit_location, and if that's also unset, it falls back to the damaged_actor's location. This property provides flexibility in how the AI perceives the origin of the damage.
+
+tag (Name): An optional identifier for the damage event. Tags can be used to categorize or differentiate damage types (e.g., "Explosion", "Bullet") for more nuanced AI responses.
+
+Usage:
+The AIDamageEvent struct can be used to inform AI characters about damage events in the game world. For example, when a player attacks an enemy NPC, an AIDamageEvent could be generated and processed by the AI Perception System, triggering the NPC to react accordingly, such as taking cover or returning fire.
+
+## 97. unreal.AIDynamicParam
+The unreal.AIDynamicParam struct in Unreal Engine is designed for use within the AI and Environment Query System (EQS), facilitating dynamic parameterization of queries based on runtime conditions. This flexibility allows AI behaviors to adapt to changing game states, making AI more responsive and intelligent.
+
+Properties:
+bb_key (BlackboardKeySelector): A selector for a key in the AI's Blackboard, which can be used to dynamically source the parameter's value at runtime. This is particularly useful for AI that relies on Blackboard-driven behavior trees, allowing EQS queries to integrate seamlessly with the broader AI decision-making process.
+
+param_name (Name): The name identifier for the parameter. This is used within EQS queries to reference the dynamic parameter, ensuring that the correct data is applied to the query at runtime.
+
+param_type (AIParamType): Indicates the type of the parameter (e.g., Float, Int, Bool), defining how the value is interpreted within the context of the EQS query. This type must match the expected type within the query where the parameter is used.
+
+value (float): The default or static value for the parameter. This value can be overridden at runtime by the value sourced from the specified Blackboard key if one is provided.
+
+Usage:
+AIDynamicParam is typically used in scenarios where an AI's behavior or decisions need to adapt based on the game state, such as changing target priorities, adjusting search areas, or modifying thresholds for actions. For example, an AI character might use an EQS query to find cover points, with a dynamic parameter specifying the maximum acceptable distance to a cover point based on the character's current health level.
+
+Here's a conceptual example of how AIDynamicParam might be configured for such a use case:
+
+```cpp
+
+// Example of setting up an AIDynamicParam in C++
+
+AIDynamicParam DistanceParam;
+DistanceParam.param_name = FName(TEXT("MaxCoverDistance"));
+DistanceParam.param_type = AIParamType::FLOAT;
+DistanceParam.value = 1000.0f; // Default distance
+DistanceParam.bb_key = BlackboardKeySelector(FName(TEXT("DynamicCoverDistance")));
+
+// Assuming this parameter is then applied to an EQS query within the AI's behavior
+```
+## 98. unreal.AimTarget
+The unreal.AimTarget struct in Unreal Engine, particularly within the context of the Control Rig plugin, is designed to define a target for aim constraints. Aim constraints are commonly used in rigging and animation to orient parts of a character or object towards a specific target, ensuring that the aim or look direction follows the target dynamically.
+
+Properties:
+align_vector (Vector): This property specifies the vector in the target's space to which the aim vector will be aligned. In the context of orienting to a target, this vector defines how the aiming entity should orient itself relative to the target. For example, if aiming with a character's head, the align vector could specify which direction the head's forward vector should point.
+
+transform (Transform): Defines the transform of the aim target itself. This includes the target's position, rotation, and scale in the world or parent space. The aiming entity will use this transform to determine how to orient itself towards the target.
+
+weight (float): Specifies the weight of the target, which can influence how strongly the aim constraint affects the aiming entity. A weight of 1.0 means the aim is fully influenced by this target, while a weight of 0 means it has no influence. This allows for blending between multiple aim targets or smoothly transitioning the influence of the target on the aiming entity.
+
+Example:
+Consider a scenario where you're setting up a control rig for a character's head to aim towards a point of interest. You could configure an AimTarget to specify the point of interest's transform, use a forward vector as the align vector to indicate which direction the head should consider as "forward" towards the target, and set the weight to control the influence of this aiming behavior.
+
+```cpp
+
+// Pseudocode example for setting up an AimTarget within a Control Rig
+
+unreal.AimTarget pointOfInterest;
+pointOfInterest.align_vector = unreal.Vector(0, 0, 1); // Assuming Z is forward
+pointOfInterest.transform = unreal.Transform(targetLocation, targetRotation, unreal.Vector(1, 1, 1));
+pointOfInterest.weight = 1.0; // Full influence
+
+// This AimTarget would then be used within the rig logic to orient the head towards
+```
+
+## 99. 
