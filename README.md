@@ -1704,7 +1704,9 @@ my_ability.trigger_data = dodge_trigger_data
 # In practice, you would use Unreal Engine's editor or additional API functions
 # to properly register this configuration as part of the ability's setup.
 ```
+
 ## 79. ActiveGameplayCue
+
 Purpose: ActiveGameplayCue instances represent specific instances of gameplay cues that are currently active within the game. Gameplay Cues are a way to link gameplay events (like receiving damage, healing, or any custom event) to visual, audio, or other kinds of effects. This linkage allows for a more dynamic and responsive game environment where actions have immediate and noticeable feedback.
 
 Base Class: Inherits from FastArraySerializerItem, which is a part of Unreal Engine's system for efficiently serializing arrays of data, particularly useful for replicating state changes across the network in multiplayer games. This inheritance implies that ActiveGameplayCue is designed to be efficiently serialized and synchronized between clients and servers in a networked game.
@@ -1750,6 +1752,7 @@ Example Use Case:
 While ActiveGameplayEffect instances are typically managed by the Gameplay Abilities System itself rather than directly instantiated in game scripts, understanding their role is key for designing gameplay. For instance, when a character casts a spell that applies a damage-over-time effect to an enemy, the system would create an ActiveGameplayEffect instance to represent this effect, using the defined GameplayEffectSpec to apply the relevant damage at specified intervals.
 
 ## 82. unreal.ActiveGameplayEffectHandle
+
 The unreal.ActiveGameplayEffectHandle class in Unreal Engine's Gameplay Abilities System serves as a unique identifier or handle for instances of active gameplay effects. This handle is crucial for managing gameplay effects applied to characters, items, or other entities within the game, especially when specific effects need to be modified, queried, or removed after their initial application.
 
 Key Features:
@@ -1760,9 +1763,9 @@ Safe Interaction: Using a handle to refer to gameplay effects helps prevent issu
 Control Over Effects: Handles are essential for scenarios where an ability or game logic needs to precisely control the lifecycle of an effect it has applied. For example, an ability that applies a buff but needs to remove it prematurely based on certain conditions can use the handle to specifically target and remove the correct effect.
 
 Operators:
-Equality (__eq__): The equality operator allows for comparison between two ActiveGameplayEffectHandle instances to determine if they refer to the same active gameplay effect. This is useful for tracking and managing effects.
+Equality (**eq**): The equality operator allows for comparison between two ActiveGameplayEffectHandle instances to determine if they refer to the same active gameplay effect. This is useful for tracking and managing effects.
 
-Inequality (__ne__): The inequality operator enables checking whether two handles do not refer to the same gameplay effect, facilitating logic that depends on the uniqueness of applied effects.
+Inequality (**ne**): The inequality operator enables checking whether two handles do not refer to the same gameplay effect, facilitating logic that depends on the uniqueness of applied effects.
 
 Example Use Case:
 Consider an ability in a game that applies a temporary speed boost to a character. When the ability is activated, it creates an active gameplay effect that increases the character's movement speed. The system returns an ActiveGameplayEffectHandle for this effect. If the character then enters a state where speed boosts are not allowed (e.g., being stunned), the game logic can use the handle to specifically remove the speed boost effect, even if other effects are also active on the character.
@@ -1781,6 +1784,7 @@ if character.is_stunned():
 ```
 
 ## 83. unreal.ActorComponentTickFunction
+
 The unreal.ActorComponentTickFunction class in Unreal Engine is a specialized tick function used for ticking actor components. It is a part of the engine's ticking system, which is responsible for updating the logic of game objects every frame. This particular tick function is designed to call the UActorComponent::ConditionalTick method, allowing actor components to update their state or perform actions on a regular basis.
 
 Key Properties:
@@ -1825,6 +1829,7 @@ void UMyCustomComponent::InitializeComponent()
 ```
 
 ## 84. unreal.ActorDataLayer
+
 The unreal.ActorDataLayer class in Unreal Engine is a struct designed to facilitate the organization of actors within the game world or scene by grouping them into layers. This organizational tool is especially useful in complex projects with numerous actors, allowing for efficient management, selection, and operation on groups of actors based on their assigned data layer.
 
 Key Feature:
@@ -1853,7 +1858,9 @@ for actor in actors_in_layer:
     actor.set_visibility(False, True)  
     # Example operation: Hide the actor
 ```
+
 ## 85. unreal.ActorForWorldTransforms
+
 The unreal.ActorForWorldTransforms class in Unreal Engine is a structure designed to specify parts of an actor for which world transforms can be determined. This struct is particularly useful in contexts where precise control over the position, rotation, and scale of specific actor components or sockets is required, such as in cinematic sequences, animations, or when dynamically positioning objects in the world.
 
 Properties:
@@ -1888,6 +1895,7 @@ actor_for_transforms = unreal.ActorForWorldTransforms(actor=character_actor,
 ```
 
 ## 86. unreal.ActorInstanceHandle
+
 The unreal.ActorInstanceHandle class in Unreal Engine is a struct designed to provide a unified and efficient way to reference both heavyweight actors and lightweight instances within the engine. This handle facilitates the management and interaction with objects in the game world, offering flexibility in how objects are represented and manipulated, particularly in scenarios where performance optimization is crucial.
 
 Key Features
@@ -1934,6 +1942,7 @@ for actor in actors_in_layer:
 ```
 
 ## 88. unreal.ActorPerceptionBlueprintInfo
+
 The unreal.ActorPerceptionBlueprintInfo struct in Unreal Engine is a part of the AI Module, specifically related to the AI Perception system. This system is designed to enable AI characters (NPCs) to perceive the world around them, including other actors, through various senses like sight, sound, and smell. The ActorPerceptionBlueprintInfo struct provides information about a particular actor that has been perceived by an AI character, including the stimuli that have been sensed and whether the perceived actor is considered hostile.
 
 Properties:
@@ -1967,6 +1976,7 @@ for info in perceived_actors_info:
 ```
 
 ## 89. unreal.ActorPerceptionUpdateInfo
+
 The unreal.ActorPerceptionUpdateInfo struct in Unreal Engine is part of the AI Module, specifically used within the AI Perception system. This system enables AI characters (NPCs) to perceive the world around them, including other actors, through various senses like sight, sound, and smell. The ActorPerceptionUpdateInfo struct is used to convey information about updates to an AI's perception of a particular actor, primarily focusing on the sensory stimuli associated with that actor.
 
 Properties:
@@ -1998,7 +2008,9 @@ def on_perception_update(ai_perception_component, updated_actors_info):
             print(f"AI has heard a sound from {stimulus.stimulus_location}")
             # Additional logic to investigate the sound source
 ```
+
 ## 90. unreal.ActorRecordedProperty
+
 The unreal.ActorRecordedProperty struct in Unreal Engine, specifically within the context of the Takes system (part of the Sequencer and used extensively for cinematic creation and motion capture), is designed to define properties of actors that should be recorded during a take. This struct is particularly useful for specifying which aspects of an actor's state are important to capture for playback or post-production purposes.
 
 Properties:
@@ -2025,7 +2037,9 @@ take_recorder_source.add_recorded_property(location_property)
 # Now, when a take is recorded, the actor's location will be captured
 # based on the settings defined in location_property
 ```
+
 ## 91. unreal.ActorTickFunction
+
 The unreal.ActorTickFunction class in Unreal Engine is a specialized tick function designed to update actors each frame or at specified intervals. This function is part of the engine's broader system for scheduling and executing updates for game objects, allowing for precise control over when and how actors are updated.
 
 Key Properties:
@@ -2057,7 +2071,9 @@ void AMyActor::Tick(float DeltaTime)
     CheckForInteractions();
 }
 ```
+
 ## 92. unreal.AddAllPatchesButton
+
 The unreal.AddAllPatchesButton struct is specifically designed to facilitate UI customization within the Unreal Engine editor, particularly for the DMX Take Recorder properties in the context of the DMXEngine plugin. This struct is a clever workaround to introduce custom UI elements, such as buttons, into the DetailsView of the DMX Take Recorder's UI, circumventing limitations posed by the existing UI customization system of the Take Recorder.
 
 Purpose:
@@ -2074,9 +2090,8 @@ In practical terms, the AddAllPatchesButton might be used to add a button that, 
 Technical Implementation:
 While the exact implementation details might vary, the general approach involves defining the AddAllPatchesButton struct within the DMXEngine plugin's codebase and then creating a custom UI customization class that looks for this struct within the DMX Take Recorder properties. When found, the customization class would then inject the actual button into the UI, along with the logic needed to perform its intended action.
 
-
-
 ## 93. unreal.AddNewSubobjectParams
+
 The unreal.AddNewSubobjectParams struct in Unreal Engine is designed to encapsulate the various options and settings that can be specified when adding a new subobject to an actor or component, particularly within the context of a Blueprint. This functionality is crucial for dynamically extending the behavior and structure of objects within the game world, allowing for a more modular and flexible design approach.
 
 Properties:
@@ -2109,6 +2124,7 @@ params = unreal.AddNewSubobjectParams(
 # Add the new sensor component to the actor
 new_sensor_handle = unreal.SubobjectDataSubsystem.add_new_subobject(params)
 ```
+
 ## 94. unreal.AdvanceConversationRequest
 
 The unreal.AdvanceConversationRequest struct in Unreal Engine is part of the Common Conversation system, a framework designed to facilitate the creation and management of dialogue and conversation systems in games. This struct is specifically used to request the advancement of a conversation, typically after a player has made a choice or when the conversation should proceed to the next node based on game logic.
@@ -2136,6 +2152,7 @@ conversation_system.advance_conversation(advance_request)
 ```
 
 ## 95. unreal.AgentDebugVisualization
+
 The unreal.AgentDebugVisualization struct is part of the MassGameplay plugin in Unreal Engine, specifically within the MassGameplayDebug module. It is designed to facilitate debugging of agents within the Mass AI system by providing customizable visual representations. This struct is a valuable tool for developers working with large-scale AI simulations, as it allows for the visual inspection of agent states and behaviors in the game world.
 
 Properties:
@@ -2167,8 +2184,10 @@ DebugVisualization->MaterialOverride = MyAgentMaterial;
 DebugVisualization->VisualFarCullDistance = 10000;
 DebugVisualization->VisualNearCullDistance = 100;
 DebugVisualization->WireShape = MassEntityDebugShape::Cube;
-``` 
+```
+
 ## 96. unreal.AIDamageEvent
+
 The unreal.AIDamageEvent struct in Unreal Engine is used within the AI Module, specifically with the AI Perception System, to represent and communicate information about damage events to AI characters. This struct allows AI systems to understand when damage has occurred, who was damaged, who caused the damage, and other relevant spatial information. It's essential for developing AI behaviors that respond to combat situations, such as seeking cover, retaliating, or assisting allies.
 
 Properties:
@@ -2188,6 +2207,7 @@ Usage:
 The AIDamageEvent struct can be used to inform AI characters about damage events in the game world. For example, when a player attacks an enemy NPC, an AIDamageEvent could be generated and processed by the AI Perception System, triggering the NPC to react accordingly, such as taking cover or returning fire.
 
 ## 97. unreal.AIDynamicParam
+
 The unreal.AIDynamicParam struct in Unreal Engine is designed for use within the AI and Environment Query System (EQS), facilitating dynamic parameterization of queries based on runtime conditions. This flexibility allows AI behaviors to adapt to changing game states, making AI more responsive and intelligent.
 
 Properties:
@@ -2216,7 +2236,9 @@ DistanceParam.bb_key = BlackboardKeySelector(FName(TEXT("DynamicCoverDistance"))
 
 // Assuming this parameter is then applied to an EQS query within the AI's behavior
 ```
+
 ## 98. unreal.AimTarget
+
 The unreal.AimTarget struct in Unreal Engine, particularly within the context of the Control Rig plugin, is designed to define a target for aim constraints. Aim constraints are commonly used in rigging and animation to orient parts of a character or object towards a specific target, ensuring that the aim or look direction follows the target dynamically.
 
 Properties:
@@ -2241,4 +2263,317 @@ pointOfInterest.weight = 1.0; // Full influence
 // This AimTarget would then be used within the rig logic to orient the head towards
 ```
 
-## 99. 
+## 99. unreal.AINoiseEvent
+The unreal.AINoiseEvent struct in Unreal Engine is part of the AI Module, specifically used within the AI Perception system to represent noise events that AI can detect. This struct allows developers to simulate environmental sounds or actions that generate noise, enabling AI characters to respond to these sounds based on their loudness, location, and the identity of the instigator. It is a critical component for creating immersive and responsive AI behaviors that can hear and react to the player and other NPCs in the game world.
+
+Properties:
+instigator (Actor): The actor responsible for creating the noise. This can be any actor in the game, including the player, NPCs, or even non-character actors like a door slamming or a gun being fired.
+
+loudness (float): A modifier for the noise's loudness. This value can influence how far the noise travels and how likely it is to be heard by AI. If max_range is set, loudness acts as a multiplier to that range.
+
+max_range (float): Defines the maximum distance at which the noise can be heard. This value is multiplied by the loudness modifier to calculate the final range. A value of 0 indicates no limit to the noise's range, though AI listeners will still have their own hearing limits.
+
+noise_location (Vector): Specifies the location where the noise originates. If not set, the location of the instigator will be used by default. This allows for noise to be attributed to a specific point in space, regardless of the instigator's current position.
+
+tag (Name): An optional identifier for categorizing the noise event. Tags can be used to differentiate between types of sounds, making it easier for AI to determine the appropriate response (e.g., distinguishing between a harmless noise and a potential threat).
+
+Usage:
+Noise events are typically used to alert AI characters to potential threats or points of interest in the environment. For example, when the player fires a weapon without a silencer, an AINoiseEvent can be generated to simulate the sound of the gunshot. AI characters with hearing capabilities can then detect this event and respond accordingly, such as investigating the noise source or entering combat.
+
+Here's a conceptual example of how to create and register an AINoiseEvent:
+
+```cpp
+
+// Example C++ code to generate a noise event
+
+AActor* NoiseInstigator = GetPlayerCharacter(); // Assuming this gets the player character
+FVector NoiseLocation = NoiseInstigator->GetActorLocation();
+float NoiseLoudness = 1.0f;
+float NoiseMaxRange = 1000.0f;
+FName NoiseTag = FName(TEXT("Gunshot"));
+
+// Create the noise event struct
+AINoiseEvent NoiseEvent;
+NoiseEvent.Instigator = NoiseInstigator;
+NoiseEvent.NoiseLocation = NoiseLocation;
+NoiseEvent.Loudness = NoiseLoudness;
+NoiseEvent.MaxRange = NoiseMaxRange;
+NoiseEvent.Tag = NoiseTag;
+
+// Assuming there's an AI Perception System in place that can process this noise event
+UAIPerceptionSystem::ReportNoiseEvent(GetWorld(), NoiseLocation, Loudness, NoiseInstigator, MaxRange
+```
+
+## 100. unreal.AIRequestID
+The unreal.AIRequestID in Unreal Engine is a simple, yet crucial component of the AI Module, designed to uniquely identify AI requests, such as pathfinding operations, task requests, or any other asynchronous AI activities that require tracking and management. This identification system is instrumental in managing the lifecycle of these requests, including initiating, tracking progress, and handling the completion or cancellation of AI operations.
+
+Key Characteristics:
+The AIRequestID does not have explicitly listed properties in the given description, but it typically contains at least one integral value serving as the unique identifier for an AI request. This ID facilitates the coordination between AI systems and the tasks they perform, ensuring that responses or updates can be accurately matched to their corresponding requests.
+
+Example Scenario:
+Imagine an AI character in a game needs to navigate to a point of interest. The game's AI system requests a path from the current location to the destination through the pathfinding system. The pathfinding operation is asynchronous, as calculating the path can take time, especially in complex environments.
+
+cpp
+Copy code
+FAIRequestID RequestID = UNavigationSystemV1::RequestPathToLocation(...parameters...);
+Later, the pathfinding system completes the path calculation and notifies the AI system that the requested path is ready. The notification includes the AIRequestID originally provided, allowing the AI system to confirm that the path received corresponds to the correct request, especially in cases where multiple pathfinding requests might be in progress simultaneously.
+
+```cpp
+
+void OnPathReady(FAIRequestID CompletedRequestID, FNavPathSharedPtr Path)
+{
+    if (CompletedRequestID == RequestID)
+    {
+        // The path is confirmed to be the response to our specific request.
+        // Proceed with using the path for AI character navigation.
+    }
+}
+```
+## 101. unreal.AISenseAffiliationFilter
+The unreal.AISenseAffiliationFilter struct in Unreal Engine is designed to configure how AI perceives other actors based on their affiliations—namely, whether they are enemies, neutrals, or friendlies. This struct is primarily used in conjunction with the AI Perception system, which allows AI characters to detect and respond to other actors in the game world based on various senses (sight, sound, etc.).
+
+Properties:
+detect_enemies (bool): If set to true, the AI will be configured to detect actors that are considered enemies. This is crucial for AI behaviors involving combat or avoidance strategies.
+
+detect_friendlies (bool): When enabled by setting it to true, the AI will detect actors that are considered friendlies. This can be important for behaviors such as following or supporting allied characters.
+
+detect_neutrals (bool): If this is set to true, the AI will detect neutral actors—those that are neither friends nor enemies. Detecting neutrals can be useful for behaviors involving general awareness of the environment or for interactions with characters that have not yet been classified as friend or foe.
+
+Example Scenario:
+Consider an AI character that needs to be aware of enemies and neutrals but not friendlies, perhaps because it is a guard that should react to intruders and other suspicious characters without being distracted by allies:
+
+```cpp
+
+UAIPerceptionComponent* PerceptionComponent = ...; // Assume this is already initialized
+
+FAISenseAffiliationFilter Filter;
+Filter.detect_enemies = true;
+Filter.detect_neutrals = true;
+Filter.detect_friendlies = false;
+
+PerceptionComponent->SetSenseAffiliationFilter(Filter);
+```
+
+## 102. unreal.AIStimulus
+The unreal.AIStimulus struct in Unreal Engine is a critical component of the AI Perception System, designed to represent sensory data perceived by AI characters. This system enables AI to detect and respond to various stimuli in the environment, such as sounds, sights, or other sensory inputs, facilitating more immersive and intelligent NPC behaviors.
+
+Properties:
+age (float): Represents how long ago (in seconds) the stimulus was registered. This allows AI systems to consider the freshness of the stimulus when deciding how to react.
+
+expiration_age (float): Specifies the age (in seconds) at which the stimulus is considered expired and no longer relevant to perception processing. This helps in managing the lifecycle of perceived stimuli.
+
+receiver_location (Vector): The location of the AI character that received the stimulus. This is important for calculating the distance to the stimulus source and potentially for determining the direction from which the stimulus originated.
+
+stimulus_location (Vector): The point in the world where the stimulus originated. Accurate location data is crucial for AI navigation and interaction decisions, such as moving towards the source of a sound.
+
+strength (float): A value representing the intensity or significance of the stimulus. This can be used by AI to prioritize responses to multiple stimuli or to gauge the threat level of a perceived entity.
+
+successfully_sensed (bool): Indicates whether the stimulus was successfully sensed by the AI. This can be used to filter out unsuccessful attempts to perceive stimuli, ensuring that only actionable sensory data is processed.
+
+tag (Name): An optional identifier that can be used to categorize or further describe the stimulus. Tags offer a way to implement specialized responses to different types of stimuli, such as distinguishing between friend and foe.
+
+Example Scenario:
+An AI guard character is patrolling when a player character knocks over a vase, creating a noise. The game system generates an AIStimulus for the noise, including its location, strength, and the time it occurred. The AI Perception System processes this stimulus, and if the guard successfully senses it (based on the guard's sensory configuration and the properties of the stimulus), the guard can then react appropriately, such as investigating the noise source.
+
+```cpp
+
+// Pseudocode example of generating a noise stimulus
+FVector NoiseLocation = GetActorLocation(); // Location of the noise source
+float NoiseStrength = 1.0f; // The loudness of the noise
+FName NoiseTag = FName(TEXT("DistractingNoise")); // Optional tag to identify the stimulus type
+
+AIStimulus NoiseStimulus;
+NoiseStimulus.stimulus_location = NoiseLocation;
+NoiseStimulus.strength = NoiseStrength;
+NoiseStimulus.tag = NoiseTag;
+
+// Assuming a function to report the stimulus to the AI Perception System
+ReportStimulus(NoiseStimulus);
+```
+## 103. unreal.AITestSpawnInfo
+The unreal.AITestSpawnInfo struct in Unreal Engine is a versatile tool used within the context of automated AI testing, particularly in conjunction with the AFunctionalAITest framework. This struct allows for the specification of detailed spawn information for AI entities in a test environment, enabling developers to set up complex scenarios for testing AI behavior under controlled conditions.
+
+Properties:
+behavior_tree (BehaviorTree): Specifies a behavior tree to be applied to the spawned AI. This allows for testing of specific AI logic flows and decision-making processes in a controlled environment.
+
+controller_class (type(Class)): The class used to override the default controller class for the pawn. If None, the pawn's default controller class is used. This is useful for testing AI with custom controller logic.
+
+number_to_spawn (int32): Indicates the number of AI entities to spawn for the test. This can be used to test how AI behaves in scenarios ranging from solitary entities to large groups.
+
+pawn_class (type(Class)): Determines the type of AI pawn to be spawned. This allows for testing across different AI characters or entities within the game.
+
+pre_spawn_delay (float): Specifies a delay before the first spawn attempt is made. This can be used to synchronize AI spawning with other elements of the test setup.
+
+spawn_delay (float): The delay between consecutive spawn attempts, allowing for staggered spawning of AI entities.
+
+spawn_location (Actor): Designates the location where AI entities should be spawned. This is critical for setting up test scenarios that depend on specific spatial arrangements.
+
+team_id (GenericTeamId): Identifies the team ID for the spawned AI, useful for testing scenarios involving team-based behaviors or interactions between different AI factions.
+
+Example Scenario:
+Imagine a test scenario where a developer wants to evaluate the performance of a new navigation behavior tree in a crowded environment. The developer could set up an AITestSpawnInfo instance to spawn several AI entities near key navigation challenges in the level, each configured with the new behavior tree. By observing the AI's performance, the developer can identify potential issues or areas for improvement in the behavior tree's logic.
+
+## 104. unreal.AITestSpawnInfoBase
+The unreal.AITestSpawnInfoBase struct is a foundational element within Unreal Engine's functional AI testing framework, specifically designed to define the basic parameters for spawning AI entities during automated tests. This struct allows developers to specify where and when AI entities should be spawned in the game world, facilitating the creation of diverse testing scenarios to evaluate AI behaviors and performance.
+
+Properties:
+number_to_spawn (int32): Determines the total number of AI entities to spawn. This allows for testing scenarios with varying degrees of complexity, from individual AI entities to large groups, providing insights into how AI performs under different conditions.
+
+pre_spawn_delay (float): Specifies a delay (in seconds) before attempting the first spawn. This can be used to synchronize AI spawning with other test setup steps or to delay AI introduction into the test environment until certain conditions are met.
+
+spawn_delay (float): The delay (in seconds) between consecutive spawn attempts. This parameter allows for staggered spawning of AI entities, which can be useful for observing AI interactions over time or for gradually increasing the complexity of the test environment.
+
+spawn_location (Actor): Indicates the location where AI entities should be spawned. This is crucial for setting up test scenarios that depend on AI entities being placed in specific parts of the game world, whether for navigation tests, interaction with the environment, or engagement with the player or other AI.
+
+Example Scenario:
+Imagine conducting an AI navigation test where the goal is to assess how well AI entities navigate from various spawn points to a target location under different conditions (e.g., varying numbers of obstacles, different AI group sizes). A developer could define multiple AITestSpawnInfoBase instances, each with different spawn_location and number_to_spawn values, and then initiate the test to systematically evaluate navigation performance across these varied scenarios.
+
+## 105. unreal.AITestSpawnSet
+The unreal.AITestSpawnSet struct in Unreal Engine is a vital component of the AI testing framework, specifically designed for use in AFunctionalAITest tests. This struct allows developers to define sets of AI entities to spawn as part of automated tests, facilitating comprehensive evaluation of AI behaviors and interactions within controlled scenarios.
+
+Properties:
+enabled (bool): Indicates whether the spawn set is active for the test. This allows developers to easily enable or disable specific spawn sets without removing them from the test configuration, providing flexibility in test setup and execution.
+
+fallback_spawn_location (Actor): Specifies a fallback location used for spawning if individual spawn info entries do not define one. This ensures that all AI entities have a valid spawn point, even if specific locations are not set for each one.
+
+name (Name): A name given to the spawn set to help identify it, particularly useful in complex tests with multiple spawn sets. Naming facilitates easier debugging and test configuration management.
+
+spawn_info_container (Array(AITestSpawnInfo)): Contains the specific spawn information for what to spawn, including details such as spawn location, number of entities to spawn, spawn delay, and the classes of the AI entities and their controllers. This array is the core of the spawn set, defining the actual content and parameters of the test scenario.
+
+Example Scenario:
+Imagine a scenario where a developer wants to test how an AI reacts to being outnumbered by enemies. The developer could create an AITestSpawnSet with a name indicating the test's purpose (e.g., "OutnumberedTest"), set it to enabled, and populate the spawn_info_container with AITestSpawnInfo instances that define the enemy AI entities to spawn, their spawn locations, and any relevant behavior trees or controller classes. The fallback_spawn_location could be set to ensure all AI entities have a default location if specific ones are not defined.
+
+## 106. unreal.AITestSpawnSetBase
+The unreal.AITestSpawnSetBase struct serves as the foundational structure for defining AI Test Spawn Sets in the context of AFunctionalAITestBase tests within Unreal Engine. This base struct provides a general framework for configuring how and where AI entities are spawned during automated functional AI testing. By using this struct, developers can create comprehensive and flexible test setups to evaluate AI behaviors under various conditions.
+
+Properties:
+enabled (bool): Indicates whether the spawn set is active and should be used during the test. This allows test designers to easily enable or disable specific sets of spawns without having to remove them entirely from the test configuration.
+
+fallback_spawn_location (Actor): Specifies a default spawn location to be used in case specific spawn information entries within the set do not define their own locations. This ensures that all AI entities designated for spawning by the set have a valid location, facilitating smoother test execution and setup.
+
+name (Name): Provides a means to name the spawn set, aiding in identification and organization, especially in complex tests that involve multiple spawn sets. Naming can be particularly helpful for debugging purposes and for understanding the test setup at a glance.
+
+Example Scenario:
+Consider a scenario where a developer is testing AI navigation behaviors in a complex urban environment. The developer could define several AITestSpawnSetBase instances, each configured with a unique name and fallback spawn location corresponding to different areas of the map. Depending on the specific focus of each test (e.g., navigation under fire, stealth approaches, group movements), the developer could enable or disable specific spawn sets, ensuring that the AI entities are spawned in the most relevant locations for each test case.
+
+## 107. unreal.AjaMediaTimecodeConfiguration
+The unreal.AjaMediaTimecodeConfiguration struct in Unreal Engine is part of the AJA Media Plugin, which provides support for AJA video hardware devices. This struct is specifically designed to configure how timecode information is extracted from video signals received through AJA hardware. It allows users to specify the source of the video signal and the format of the timecode being read, facilitating synchronization and timecoding in live production environments, virtual sets, and other scenarios where precise timing information is critical.
+
+Properties:
+media_configuration (MediaIOConfiguration): Defines the source of the video signal from which the timecode will be read. This includes the device, video input, and other relevant settings that identify the specific AJA hardware and input channel being used.
+
+timecode_format (MediaIOTimecodeFormat): Specifies the format of the timecode to be read from the video signal. This setting ensures that the timecode is interpreted correctly according to the standard or format being used (e.g., LTC, VITC) and is crucial for accurate timecode tracking and management.
+
+Example Scenario:
+Imagine a virtual production setup where Unreal Engine is used to render real-time backgrounds for live actors being filmed on a green screen. The camera feeds are captured through AJA video hardware, and it's crucial to synchronize the Unreal Engine rendered output with the live camera feeds. By configuring the AjaMediaTimecodeConfiguration with the appropriate media_configuration and timecode_format, the production team can ensure that the timecode from the camera feeds is accurately read and used for synchronization, enabling seamless integration of live-action footage with the virtual environment.
+
+## 108. unreal.AjaMediaTimecodeReference 
+The unreal.AjaMediaTimecodeReference struct in Unreal Engine is part of the AJA Media Plugin, which facilitates integration with AJA video hardware devices. This struct is designed to configure the retrieval of timecode information from an AJA device, specifically focusing on the settings related to Linear Time Code (LTC) obtained through the device's reference input.
+
+Properties:
+device (MediaIODevice): Specifies the AJA device from which the LTC timecode is to be read. This property identifies the specific hardware device by its connection and configuration details, ensuring that the timecode is read from the correct source.
+
+ltc_frame_rate (FrameRate): Defines the frame rate of the LTC signal obtained from the reference pin of the AJA device. Accurate frame rate information is crucial for interpreting the LTC timecode correctly, as it dictates the timing and synchronization of video frames.
+
+ltc_index (int32): Indicates the index of the LTC signal to read from the device's reference pin. This is particularly relevant when multiple LTC signals are available, allowing users to specify which particular signal should be used for timecode reference.
+
+Example Scenario:
+In a live broadcast scenario, where multiple cameras are feeding into Unreal Engine for real-time graphics overlay, each camera's feed might be associated with a distinct LTC timecode for synchronization purposes. By configuring the AjaMediaTimecodeReference with the appropriate device settings and LTC frame rate, the production team can align the graphics and effects rendered by Unreal Engine with the live camera feeds, ensuring seamless integration and broadcast continuity.
+
+## 109. unreal.AlphaBlend
+The unreal.AlphaBlend struct in Unreal Engine is designed to manage blending operations, offering support for various blending options, including linear, cubic, and more, with the added flexibility of defining custom blending curves. This struct is commonly used in animations and other areas where a smooth transition between states or values is required.
+
+Properties:
+blend_option (AlphaBlendOption): Specifies the type of blending operation to be used. The AlphaBlendOption enum includes various predefined blending methods such as Linear, Cubic, Quadratic In/Out, and Custom, among others. Each option controls how the blend transitions from the start to the end value over time, affecting the smoothness and dynamics of the transition.
+
+blend_time (float): The duration of the blend, in seconds. This defines how long it will take to transition from the starting state to the ending state. A shorter blend time results in a faster transition, while a longer blend time leads to a smoother, more gradual change.
+
+custom_curve (CurveFloat): When the blend_option is set to Custom, this property allows the specification of a CurveFloat object that defines the custom blending curve. The curve dictates how the alpha value changes over time, providing precise control over the blending operation's progression. This is particularly useful for achieving specific transition effects that are not covered by the standard blending options.
+
+Example Scenario:
+In a character animation setup, you might use unreal.AlphaBlend to control the transition between a character's walking and running animations based on the character's speed. By adjusting the blend_option and blend_time, you can fine-tune how quickly and smoothly the character transitions from walking to running as the speed increases.
+
+```cpp
+
+unreal.AlphaBlend AnimationBlend;
+AnimationBlend.blend_option = unreal.AlphaBlendOption.Cubic;
+AnimationBlend.blend_time = 0.5f; // Transition over 0.5 seconds
+// Optionally set a custom curve if a more complex transition is needed
+```
+
+## 110. unreal.AlphaBlendArgs
+The unreal.AlphaBlendArgs struct in Unreal Engine is designed to provide a standardized way to define the parameters for creating an AlphaBlend object. This struct simplifies the process of specifying how blending should be performed, particularly in animations and other transitional effects, by encapsulating the essential arguments needed for an alpha blend operation.
+
+Properties:
+blend_option (AlphaBlendOption): Determines the type of blending curve to be used. This could be linear, cubic, or another predefined curve type, each offering a different transition characteristic. The AlphaBlendOption enumeration includes options like Linear, Cubic, Quadratic In, Quadratic Out, etc., as well as a Custom option for user-defined curves.
+
+blend_time (float): Specifies the duration over which the blend occurs, in seconds. This value controls how quickly or slowly the blending transition takes place, allowing for fine-tuning of the animation or effect timing.
+
+custom_curve (CurveFloat): If the blend_option is set to Custom, this property allows for the specification of a custom blending curve via a CurveFloat object. This curve explicitly defines how the blend should progress over time, offering maximum control over the transition effect.
+
+Example Scenario:
+Consider a scenario where you have a character animation system, and you want to smoothly transition between idle and running states based on the character's speed. You decide to use a cubic blend over 0.3 seconds for a smooth acceleration effect:
+
+```cpp
+
+// Example instantiation of AlphaBlendArgs for a cubic transition
+unreal.AlphaBlendArgs BlendArgs;
+BlendArgs.blend_option = unreal.AlphaBlendOption.Cubic;
+BlendArgs.blend_time = 0.3f;
+// No custom curve is needed for a cubic blend
+```
+## 111. unreal.AnalogInputEvent
+The unreal.AnalogInputEvent class in Unreal Engine is an extension of the unreal.KeyEvent class, specifically designed to handle analog inputs. Analog inputs differ from digital inputs in that they provide a range of values instead of binary states (pressed or not pressed), which is typical for keyboard and mouse buttons. Analog inputs are common in game controllers, where joysticks and triggers can report a wide range of positions or pressures, allowing for more nuanced control in games.
+
+Key Features and Usage:
+Analog Values: The primary distinction of AnalogInputEvent from its parent KeyEvent is its ability to handle analog data. This is particularly useful for capturing the precise position of a joystick or the pressure applied to a trigger on a game controller.
+
+Gameplay Application: Analog input is crucial for gameplay mechanics that require variable input intensity or precision movement. For example, the pressure applied to a trigger might control the speed at which a vehicle moves or the force with which a character jumps.
+
+Event Handling: In Unreal Engine, AnalogInputEvent can be used within input handling systems to differentiate between analog and digital input sources. Event handlers specific to analog inputs can interpret the analog values (usually ranging from 0 to 1 or -1 to 1) and apply them to game logic accordingly.
+
+Example Scenario:
+Consider a racing game where the acceleration of a car is controlled by the pressure applied to a game controller's trigger. An AnalogInputEvent can be used to capture the trigger's position:
+
+```cpp
+
+void MyCharacter::OnTriggerPress(const FAnalogInputEvent& Event)
+{
+    if (Event.GetKey() == EKeys::Gamepad_RightTrigger)
+    {
+        float TriggerPressure = Event.GetAnalogValue();
+        // Apply the trigger pressure to control the car's acceleration
+        MyCar->SetAcceleration(TriggerPressure);
+    }
+}
+```
+## 112. unreal.AnalyticsEventAttr
+The unreal.AnalyticsEventAttr struct in Unreal Engine is designed for use with the Analytics Blueprint Library, enabling developers and designers to easily send analytics events from within Blueprints. This struct acts as a simple, blueprint-accessible version of an analytics event attribute, comprising a name-value pair that represents a single piece of data or attribute to be included in an analytics event.
+
+Properties:
+name (str): The name of the attribute. This serves as the identifier for the piece of data being recorded. It should be descriptive and consistent across similar events to ensure analytics data is meaningful and easily aggregated.
+
+value (str): The value of the attribute. This is the data or measurement associated with the name field. The value is stored as a string, but it can represent numerical data, boolean values (as "true" or "false"), or any other textual data relevant to the event being tracked.
+
+Example Scenario:
+Consider a game where you want to track player interactions with a new feature, such as a puzzle mechanic. You might send an analytics event each time a player attempts a puzzle, including attributes for the puzzle ID, whether the attempt was successful, and how long the attempt took.
+
+```blueprint
+
+// Create analytics attributes
+AnalyticsEventAttr PuzzleIDAttr;
+PuzzleIDAttr.name = "PuzzleID";
+PuzzleIDAttr.value = "Puzzle_123";
+
+AnalyticsEventAttr SuccessAttr;
+SuccessAttr.name = "Success";
+SuccessAttr.value = "true";
+
+AnalyticsEventAttr TimeTakenAttr;
+TimeTakenAttr.name = "TimeTaken";
+TimeTakenAttr.value = "45"; // Assume 45 seconds
+
+// Send an analytics event with these attributes
+RecordAnalyticsEventWithAttributes("PuzzleAttempt", [PuzzleIDAttr, SuccessAttr, TimeTakenAttr]);
+```
+
